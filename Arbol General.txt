@@ -1,0 +1,139 @@
+﻿¿Qué es un árbol general?
+Un árbol general es una estructura de datos que organiza información de manera jerárquica mediante nodos conectados entre sí.
+A diferencia de un árbol binario, donde cada nodo puede tener máximo dos hijos, en un árbol general un nodo puede tener cualquier cantidad de hijos.
+Por ejemplo, se puede utilizar para representar las carpetas de un computador, donde una carpeta principal contiene varias subcarpetas.
+  
+
+
+
+Características principales
+* Tiene un nodo principal llamado raíz.
+* Cada nodo puede tener varios hijos.
+* Los nodos se conectan mediante ramas.
+* Los nodos que no tienen hijos se llaman hojas.
+* Permite organizar información por niveles.
+Elementos de un árbol general
+Elemento
+	Definición
+	Raíz
+	Es el primer nodo del árbol.
+	Nodo
+	Es cada elemento que contiene información.
+	Padre
+	Es el nodo que tiene hijos.
+	Hijo
+	Es el nodo que depende de otro.
+	Hoja
+	Es un nodo que no tiene hijos.
+	Rama
+	Es la conexión entre dos nodos.
+	
+
+Ejemplo de un árbol general
+Imaginemos la siguiente estructura:
+         1
+       /  |  \
+      2   3   4
+     / \   |
+    5   6  7
+* El nodo 1 es la raíz.
+* Los nodos 2, 3 y 4 son hijos de 1.
+* Los nodos 5 y 6 son hijos de 2.
+* El nodo 7 es hijo de 3.
+* Los nodos 4, 5, 6 y 7 son hojas.
+Recorridos de un árbol general
+Los recorridos permiten visitar todos los nodos siguiendo un orden.
+1. Preorden: primero se visita la raíz y después sus hijos.
+2. Postorden: primero se visitan los hijos y al final la raíz.
+3. Por niveles: se visitan los nodos nivel por nivel, comenzando desde la raíz.
+Ejemplo en C++
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+
+struct Nodo {
+    int dato;
+    vector<Nodo*> hijos;
+
+
+    Nodo(int v) {
+        dato = v;
+    }
+};
+
+
+// Recorrido Preorden
+void preOrden(Nodo* raiz) {
+    if (raiz == nullptr) return;
+
+
+    cout << raiz->dato << " ";
+
+
+    for (Nodo* hijo : raiz->hijos) {
+        preOrden(hijo);
+    }
+}
+
+
+// Recorrido Postorden
+void postOrden(Nodo* raiz) {
+    if (raiz == nullptr) return;
+
+
+    for (Nodo* hijo : raiz->hijos) {
+        postOrden(hijo);
+    }
+
+
+    cout << raiz->dato << " ";
+}
+
+
+int main() {
+
+
+    Nodo* raiz = new Nodo(1);
+
+
+    Nodo* n2 = new Nodo(2);
+    Nodo* n3 = new Nodo(3);
+    Nodo* n4 = new Nodo(4);
+
+
+    raiz->hijos.push_back(n2);
+    raiz->hijos.push_back(n3);
+    raiz->hijos.push_back(n4);
+
+
+    n2->hijos.push_back(new Nodo(5));
+    n2->hijos.push_back(new Nodo(6));
+
+
+    n3->hijos.push_back(new Nodo(7));
+
+
+    cout << "Preorden: ";
+    preOrden(raiz);
+
+
+    cout << "\nPostorden: ";
+    postOrden(raiz);
+
+
+    return 0;
+}
+
+
+Resultado:
+Preorden: 1 2 5 6 3 7 4
+Postorden: 5 6 2 7 3 4 1
+¿Dónde se utilizan los árboles generales?
+* Organización de carpetas y archivos.
+* Organigramas empresariales.
+* Menús de aplicaciones.
+* Categorías de productos.
+* Estructuras de páginas web.
